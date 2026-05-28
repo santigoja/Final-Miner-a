@@ -59,12 +59,12 @@ filename = os.path.join(os.path.dirname(__file__), 'modelo_finallr.pkl')
 pipeline = pickle.load(open(filename, 'rb'))
 
 # Encabezado
-st.markdown('<p class="titulo">🫀 Predicción de Enfermedad Cardíaca</p>', unsafe_allow_html=True)
+st.markdown('<p class="titulo"> Predicción de Enfermedad Cardíaca</p>', unsafe_allow_html=True)
 st.markdown('<p class="subtitulo">Complete los datos clínicos del paciente para obtener una predicción</p>', unsafe_allow_html=True)
 st.divider()
 
 # ─── SECCIÓN 1: DATOS GENERALES ───
-st.markdown("### 📋 Datos Generales")
+st.markdown("###  Datos Generales")
 col1, col2 = st.columns(2)
 
 with col1:
@@ -73,43 +73,43 @@ with col1:
 
 with col2:
     resting_bp = st.slider('Presión Arterial en Reposo (mm Hg)', min_value=80, max_value=200, value=120, step=1)
-    st.markdown('<p class="definicion">💡 Presión de la sangre sobre las arterias cuando el corazón está en reposo. Normal: menos de 120 mm Hg.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="definicion"> Presión de la sangre sobre las arterias cuando el corazón está en reposo. Normal: menos de 120 mm Hg.</p>', unsafe_allow_html=True)
 
 st.divider()
 
 # ─── SECCIÓN 2: PRUEBA DE ESFUERZO ───
-st.markdown("### 🏃 Prueba de Esfuerzo")
+st.markdown("###  Prueba de Esfuerzo")
 col3, col4 = st.columns(2)
 
 with col3:
     max_hr = st.slider('Frecuencia Cardíaca Máxima (lpm)', min_value=60, max_value=220, value=150, step=1)
-    st.markdown('<p class="definicion">💡 Máxima cantidad de latidos por minuto alcanzada durante el ejercicio físico.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="definicion"> Máxima cantidad de latidos por minuto alcanzada durante el ejercicio físico.</p>', unsafe_allow_html=True)
     exercise_angina = st.selectbox('¿Angina inducida por ejercicio?', ['No', 'Sí'])
-    st.markdown('<p class="definicion">💡 Dolor en el pecho que aparece durante el esfuerzo físico por falta de oxígeno en el corazón.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="definicion"> Dolor en el pecho que aparece durante el esfuerzo físico por falta de oxígeno en el corazón.</p>', unsafe_allow_html=True)
 
 with col4:
     oldpeak = st.slider('Depresión del Segmento ST — Oldpeak', min_value=0.0, max_value=6.0, value=1.0, step=0.1)
-    st.markdown('<p class="definicion">💡 Cambio en la señal eléctrica del corazón durante el ejercicio. Valores altos indican posible isquemia.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="definicion"> Cambio en la señal eléctrica del corazón durante el ejercicio. Valores altos indican posible isquemia.</p>', unsafe_allow_html=True)
     st_slope = st.selectbox('Pendiente del Segmento ST durante el ejercicio', [
         'Ascendente (Up)', 'Plana (Flat)', 'Descendente (Down)'
     ])
-    st.markdown('<p class="definicion">💡 Ascendente: saludable. Plana o Descendente: posible señal de enfermedad cardíaca.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="definicion"> Ascendente: saludable. Plana o Descendente: posible señal de enfermedad cardíaca.</p>', unsafe_allow_html=True)
 
 st.divider()
 
 # ─── SECCIÓN 3: EXÁMENES CLÍNICOS ───
-st.markdown("### 🩺 Exámenes Clínicos")
+st.markdown("###  Exámenes Clínicos")
 col5, col6 = st.columns(2)
 
 with col5:
     fasting_bs = st.selectbox('¿Azúcar en sangre en ayunas > 120 mg/dl?', ['No', 'Sí'])
-    st.markdown('<p class="definicion">💡 Nivel de glucosa en sangre tras un ayuno. Por encima de 120 mg/dl puede indicar diabetes.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="definicion"> Nivel de glucosa en sangre tras un ayuno. Por encima de 120 mg/dl puede indicar diabetes.</p>', unsafe_allow_html=True)
     resting_ecg = st.selectbox('Resultado del Electrocardiograma en Reposo', [
         'Normal',
         'Anormalidad de onda ST-T (ST)',
         'Hipertrofia Ventricular Izquierda (LVH)'
     ])
-    st.markdown('<p class="definicion">💡 Normal: sin anomalías. ST: posible isquemia. LVH: ventrículo izquierdo agrandado, común en hipertensión.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="definicion"> Normal: sin anomalías. ST: posible isquemia. LVH: ventrículo izquierdo agrandado, común en hipertensión.</p>', unsafe_allow_html=True)
 
 with col6:
     chest_pain = st.selectbox('Tipo de Dolor en el Pecho', [
@@ -118,7 +118,7 @@ with col6:
         'Angina Atípica (ATA)',
         'Dolor No Anginoso (NAP)'
     ])
-    st.markdown('<p class="definicion">💡 Típica: dolor clásico de corazón. Atípica: características inusuales. No Anginoso: no relacionado al corazón. Asintomático: sin dolor pero puede haber enfermedad.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="definicion"> Típica: dolor clásico de corazón. Atípica: características inusuales. No Anginoso: no relacionado al corazón. Asintomático: sin dolor pero puede haber enfermedad.</p>', unsafe_allow_html=True)
 
 st.divider()
 
@@ -154,10 +154,10 @@ if st.button('🔍 Predecir'):
     probabilidad = pipeline.named_steps['modelo'].predict_proba(datos)[0][1]
 
     if prediccion == 1:
-        st.error('⚠️ El paciente TIENE riesgo de enfermedad cardíaca')
+        st.error(' El paciente TIENE riesgo de enfermedad cardíaca')
     else:
-        st.success('✅ El paciente NO tiene riesgo de enfermedad cardíaca')
+        st.success(' El paciente NO tiene riesgo de enfermedad cardíaca')
 
     st.progress(float(probabilidad))
-    st.info(f'📊 Probabilidad de enfermedad: **{probabilidad*100:.1f}%**')
-    st.warning('⚕️ Este resultado es orientativo. Consulte siempre a un médico especialista.')
+    st.info(f' Probabilidad de enfermedad: **{probabilidad*100:.1f}%**')
+    st.warning(' Este resultado es orientativo. Consulte siempre a un médico especialista.')
