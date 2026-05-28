@@ -17,6 +17,8 @@ st.markdown("""
     <style>
     .stApp { background-color: #ffffff; }
     .main { background-color: #ffffff; }
+
+    /* BOTÓN */
     .stButton>button {
         background-color: #c0392b;
         color: white;
@@ -26,12 +28,52 @@ st.markdown("""
         padding: 10px;
         border: none;
     }
+
     .stButton>button:hover { background-color: #a93226; }
-    .titulo { text-align: center; color: #c0392b; font-size: 36px; font-weight: bold; }
-    .subtitulo { text-align: center; color: #555; font-size: 16px; margin-bottom: 30px; }
-    .definicion { background-color: #f0f0f0; border-left: 4px solid #c0392b;
-                  padding: 8px 12px; border-radius: 5px; font-size: 13px;
-                  color: #444; margin-top: -10px; margin-bottom: 10px; }
+
+    /* TÍTULOS */
+    .titulo {
+        text-align: center;
+        color: #c0392b;
+        font-size: 36px;
+        font-weight: bold;
+    }
+
+    .subtitulo {
+        text-align: center;
+        color: #555;
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    /* DEFINICIONES */
+    .definicion {
+        background-color: #f0f0f0;
+        border-left: 4px solid #c0392b;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 13px;
+        color: #444;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    /* ARREGLAR TEXTOS BLANCOS */
+    label, .stSelectbox label, .stSlider label {
+        color: #222 !important;
+        font-weight: 600;
+    }
+
+    /* Texto pequeño arriba del slider */
+    .stSlider div[data-baseweb="slider"] + div {
+        color: #222 !important;
+    }
+
+    /* Headers de secciones */
+    h3 {
+        color: #222 !important;
+    }
+
     </style>
 """, unsafe_allow_html=True)
 
