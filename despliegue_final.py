@@ -15,8 +15,15 @@ st.set_page_config(
 # Estilos
 st.markdown("""
     <style>
-    .stApp { background-color: #ffffff; }
-    .main { background-color: #ffffff; }
+
+    /* FONDO GENERAL */
+    .stApp {
+        background-color: #ffffff;
+    }
+
+    .main {
+        background-color: #ffffff;
+    }
 
     /* BOTÓN */
     .stButton>button {
@@ -29,9 +36,11 @@ st.markdown("""
         border: none;
     }
 
-    .stButton>button:hover { background-color: #a93226; }
+    .stButton>button:hover {
+        background-color: #a93226;
+    }
 
-    /* TÍTULOS */
+    /* TÍTULO PRINCIPAL */
     .titulo {
         text-align: center;
         color: #c0392b;
@@ -39,6 +48,7 @@ st.markdown("""
         font-weight: bold;
     }
 
+    /* SUBTÍTULO */
     .subtitulo {
         text-align: center;
         color: #555;
@@ -46,7 +56,7 @@ st.markdown("""
         margin-bottom: 30px;
     }
 
-    /* DEFINICIONES */
+    /* CAJAS DE DEFINICIÓN */
     .definicion {
         background-color: #f0f0f0;
         border-left: 4px solid #c0392b;
@@ -58,20 +68,32 @@ st.markdown("""
         margin-bottom: 10px;
     }
 
-    /* ARREGLAR TEXTOS BLANCOS */
-    label, .stSelectbox label, .stSlider label {
+    /* TEXTOS DE LABELS */
+    label,
+    .stSelectbox label,
+    .stSlider label {
         color: #222 !important;
         font-weight: 600;
     }
 
-    /* Texto pequeño arriba del slider */
+    /* TEXTO SUPERIOR DE SLIDERS */
     .stSlider div[data-baseweb="slider"] + div {
         color: #222 !important;
     }
 
-    /* Headers de secciones */
+    /* ENCABEZADOS */
     h3 {
         color: #222 !important;
+    }
+
+    /* MENSAJES DE RESULTADO */
+    .stAlert {
+        color: #222 !important;
+    }
+
+    .stAlert p {
+        color: #222 !important;
+        font-weight: 600;
     }
 
     </style>
