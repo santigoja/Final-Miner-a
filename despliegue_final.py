@@ -15,7 +15,8 @@ st.set_page_config(
 # Estilos
 st.markdown("""
     <style>
-    .main { background-color: #f8f9fa; }
+    .stApp { background-color: #ffffff; }
+    .main { background-color: #ffffff; }
     .stButton>button {
         background-color: #c0392b;
         color: white;
@@ -28,6 +29,9 @@ st.markdown("""
     .stButton>button:hover { background-color: #a93226; }
     .titulo { text-align: center; color: #c0392b; font-size: 36px; font-weight: bold; }
     .subtitulo { text-align: center; color: #555; font-size: 16px; margin-bottom: 30px; }
+    .definicion { background-color: #f0f0f0; border-left: 4px solid #c0392b;
+                  padding: 8px 12px; border-radius: 5px; font-size: 13px;
+                  color: #444; margin-top: -10px; margin-bottom: 10px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -59,36 +63,66 @@ st.markdown('<p class="titulo">🫀 Predicción de Enfermedad Cardíaca</p>', un
 st.markdown('<p class="subtitulo">Complete los datos clínicos del paciente para obtener una predicción</p>', unsafe_allow_html=True)
 st.divider()
 
-# Entradas en dos columnas
+# ─── SECCIÓN 1: DATOS GENERALES ───
+st.markdown("### 📋 Datos Generales")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("### 📋 Datos Generales")
     age = st.slider('Edad (años)', min_value=18, max_value=100, value=50, step=1)
-    sex = st.selectbox('Sexo biológico del paciente', ['Masculino', 'Femenino'])
-    resting_bp = st.slider('Presión Arterial en Reposo (mm Hg)', min_value=80, max_value=200, value=120, step=1)
-    max_hr = st.slider('Frecuencia Cardíaca Máxima (lpm)', min_value=60, max_value=220, value=150, step=1)
-    oldpeak = st.slider('Depresión del Segmento ST (Oldpeak)', min_value=0.0, max_value=6.0, value=1.0, step=0.1)
+    sex = st.selectbox('Sexo biológico', ['Masculino', 'Femenino'])
 
 with col2:
-    st.markdown("### 🩺 Datos Clínicos")
-    fasting_bs = st.selectbox('¿Azúcar en ayunas > 120 mg/dl?', ['No', 'Sí'])
-    chest_pain = st.selectbox('Tipo de Dolor en el Pecho', [
-        'Asintomático (ASY)', 'Angina Típica (TA)',
-        'Angina Atípica (ATA)', 'Dolor No Anginoso (NAP)'
-    ])
-    resting_ecg = st.selectbox('Electrocardiograma en Reposo', [
-        'Normal', 'Anormalidad de onda ST-T (ST)',
-        'Hipertrofia Ventricular Izquierda (LVH)'
-    ])
-    exercise_angina = st.selectbox('¿Angina inducida por ejercicio?', ['No', 'Sí'])
-    st_slope = st.selectbox('Pendiente del Segmento ST', [
-        'Ascendente (Up)', 'Plana (Flat)', 'Descendente (Down)'
-    ])
+    resting_bp = st.slider('Presión Arterial en Reposo (mm Hg)', min_value=80, max_value=200, value=120, step=1)
+    st.markdown('<p class="definicion">💡 Presión de la sangre sobre las arterias cuando el corazón está en reposo. Normal: menos de 120 mm Hg.</p>', unsafe_allow_html=True)
 
 st.divider()
 
-# Predicción
+# ─── SECCIÓN 2: PRUEBA DE ESFUERZO ───
+st.markdown("### 🏃 Prueba de Esfuerzo")
+col3, col4 = st.columns(2)
+
+with col3:
+    max_hr = st.slider('Frecuencia Cardíaca Máxima (lpm)', min_value=60, max_value=220, value=150, step=1)
+    st.markdown('<p class="definicion">💡 Máxima cantidad de latidos por minuto alcanzada durante el ejercicio físico.</p>', unsafe_allow_html=True)
+    exercise_angina = st.selectbox('¿Angina inducida por ejercicio?', ['No', 'Sí'])
+    st.markdown('<p class="definicion">💡 Dolor en el pecho que aparece durante el esfuerzo físico por falta de oxígeno en el corazón.</p>', unsafe_allow_html=True)
+
+with col4:
+    oldpeak = st.slider('Depresión del Segmento ST — Oldpeak', min_value=0.0, max_value=6.0, value=1.0, step=0.1)
+    st.markdown('<p class="definicion">💡 Cambio en la señal eléctrica del corazón durante el ejercicio. Valores altos indican posible isquemia.</p>', unsafe_allow_html=True)
+    st_slope = st.selectbox('Pendiente del Segmento ST durante el ejercicio', [
+        'Ascendente (Up)', 'Plana (Flat)', 'Descendente (Down)'
+    ])
+    st.markdown('<p class="definicion">💡 Ascendente: saludable. Plana o Descendente: posible señal de enfermedad cardíaca.</p>', unsafe_allow_html=True)
+
+st.divider()
+
+# ─── SECCIÓN 3: EXÁMENES CLÍNICOS ───
+st.markdown("### 🩺 Exámenes Clínicos")
+col5, col6 = st.columns(2)
+
+with col5:
+    fasting_bs = st.selectbox('¿Azúcar en sangre en ayunas > 120 mg/dl?', ['No', 'Sí'])
+    st.markdown('<p class="definicion">💡 Nivel de glucosa en sangre tras un ayuno. Por encima de 120 mg/dl puede indicar diabetes.</p>', unsafe_allow_html=True)
+    resting_ecg = st.selectbox('Resultado del Electrocardiograma en Reposo', [
+        'Normal',
+        'Anormalidad de onda ST-T (ST)',
+        'Hipertrofia Ventricular Izquierda (LVH)'
+    ])
+    st.markdown('<p class="definicion">💡 Normal: sin anomalías. ST: posible isquemia. LVH: ventrículo izquierdo agrandado, común en hipertensión.</p>', unsafe_allow_html=True)
+
+with col6:
+    chest_pain = st.selectbox('Tipo de Dolor en el Pecho', [
+        'Asintomático (ASY)',
+        'Angina Típica (TA)',
+        'Angina Atípica (ATA)',
+        'Dolor No Anginoso (NAP)'
+    ])
+    st.markdown('<p class="definicion">💡 Típica: dolor clásico de corazón. Atípica: características inusuales. No Anginoso: no relacionado al corazón. Asintomático: sin dolor pero puede haber enfermedad.</p>', unsafe_allow_html=True)
+
+st.divider()
+
+# ─── PREDICCIÓN ───
 if st.button('🔍 Predecir'):
     sex_m = 1 if sex == 'Masculino' else 0
     exercise_angina_y = 1 if exercise_angina == 'Sí' else 0
@@ -119,11 +153,10 @@ if st.button('🔍 Predecir'):
     prediccion = pipeline.named_steps['modelo'].predict(datos)[0]
     probabilidad = pipeline.named_steps['modelo'].predict_proba(datos)[0][1]
 
-    st.divider()
     if prediccion == 1:
-        st.error(f'⚠️ El paciente TIENE riesgo de enfermedad cardíaca')
+        st.error('⚠️ El paciente TIENE riesgo de enfermedad cardíaca')
     else:
-        st.success(f'✅ El paciente NO tiene riesgo de enfermedad cardíaca')
+        st.success('✅ El paciente NO tiene riesgo de enfermedad cardíaca')
 
     st.progress(float(probabilidad))
     st.info(f'📊 Probabilidad de enfermedad: **{probabilidad*100:.1f}%**')
