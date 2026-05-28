@@ -165,7 +165,7 @@ with col6:
 st.divider()
 
 # ─── PREDICCIÓN ───
-if st.button('🔍 Predecir'):
+if st.button('Predecir'):
     sex_m = 1 if sex == 'Masculino' else 0
     exercise_angina_y = 1 if exercise_angina == 'Sí' else 0
     chest_asy = 1 if chest_pain == 'Asintomático (ASY)' else 0
